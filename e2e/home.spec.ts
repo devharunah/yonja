@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-for (const path of ["/", "/report", "/coach", "/dashboard"]) {
+for (const path of ["/", "/report", "/coach", "/dashboard", "/seed"]) {
   test(`${path} renders`, async ({ page }) => {
     await page.goto(path);
 
