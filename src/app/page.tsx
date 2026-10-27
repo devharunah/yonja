@@ -6,11 +6,11 @@ import { useCallback, useState } from "react";
 import { MapView } from "@/components/MapView";
 import { MonthCounters } from "@/components/MonthCounters";
 import { SpotList, SpotSheet } from "@/components/SpotSummary";
-import { Notice, button } from "@/components/ui";
+import { LivePill, Notice, button } from "@/components/ui";
 import { useSpots } from "@/lib/firebase/spots";
 
 export default function Home() {
-  const { data: spots, error } = useSpots();
+  const { data: spots, loading, error } = useSpots();
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [view, setView] = useState<"map" | "list">("map");
   const [mapFailed, setMapFailed] = useState(false);
@@ -49,10 +49,7 @@ export default function Home() {
               <p className="text-xs font-semibold text-muted">Report it, clean it, prove it.</p>
             </div>
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-xs font-bold shadow-sm">
-                <span className="h-2 w-2 animate-pulse rounded-full bg-clean" /> Live ·{" "}
-                {spots.length}
-              </span>
+              <LivePill loading={loading} count={spots.length} />
               {!mapFailed ? (
                 <button
                   type="button"

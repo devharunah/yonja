@@ -83,3 +83,13 @@ export function sacksRange(min: number, max: number): string {
   if (min === max) return `about ${min} sack${min === 1 ? "" : "s"}`;
   return `about ${min}–${max} sacks`;
 }
+
+/** Never blocks the screen on the connection: data appears as soon as Firestore answers. */
+export function LivePill({ loading, count }: { loading: boolean; count?: number }) {
+  return (
+    <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-xs font-bold shadow-sm">
+      <span className={`h-2 w-2 animate-pulse rounded-full ${loading ? "bg-partly" : "bg-clean"}`} />
+      {loading ? "Connecting…" : count === undefined ? "Live" : `Live · ${count}`}
+    </span>
+  );
+}

@@ -5,7 +5,7 @@ import { useState } from "react";
 
 import { StatusBadge } from "@/components/SpotPin";
 import { placeLine } from "@/components/SpotSummary";
-import { Card, Notice, SeverityChip, Spinner, button, sacksRange } from "@/components/ui";
+import { Card, LivePill, Notice, SeverityChip, Spinner, button, sacksRange } from "@/components/ui";
 import type { AskAnswer, Plan } from "@/lib/ai/schemas";
 import { askData, planNextDay } from "@/lib/ai/tasks";
 import { updateSpot, useSpots, useVerifications } from "@/lib/firebase/spots";
@@ -18,8 +18,6 @@ import { type RainDay, rainForecast } from "@/lib/weather";
 export default function DashboardPage() {
   const { data: spots, loading, error } = useSpots();
   const { data: verifications } = useVerifications();
-
-  if (loading) return <Spinner label="Loading live data…" />;
 
   const k = kpis(spots, verifications);
   const relapses = spots.filter((s) => s.relapse && isOpen(s.status));
@@ -36,9 +34,7 @@ export default function DashboardPage() {
             Kampala Cleaning Day
           </h1>
         </div>
-        <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-xs font-bold shadow-sm">
-          <span className="h-2 w-2 animate-pulse rounded-full bg-clean" /> Live
-        </span>
+        <LivePill loading={loading} />
       </header>
 
       {error ? <Notice tone="error" title={error} /> : null}
