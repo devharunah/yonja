@@ -1,0 +1,14 @@
+.next/
+node_modules/
+.env
+.env.local
+.env.*.local
+*.tsbuildinfo
+coverage/
+test-results/
+playwright-report/
+.playwright/
+next-env.d.ts
+out/
+.firebase/
+firebase-debug.log

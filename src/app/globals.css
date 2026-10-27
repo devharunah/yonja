@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink: #10251f;
+  --color-muted: #5b6b64;
+  --color-paper: #f5f6f2;
+  --color-line: #dfe4dc;
+  --color-brand: #146c43;
+  --color-brand-dark: #0b4a2d;
+  --color-brand-soft: #e3f1e8;
+
+  /* Pin and status colours (M1). */
+  --color-dirty: #d64933;
+  --color-partly: #e8a317;
+  --color-clean: #1f9d55;
+  --color-pending: #8a948f;
+}
+
+:root {
+  color-scheme: light;
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+body {
+  min-height: 100dvh;
+  margin: 0;
+  -webkit-tap-highlight-color: transparent;
+}
