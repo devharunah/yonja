@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={jakarta.variable}>
       <body className="font-sans antialiased">
-        <div className="mx-auto min-h-dvh max-w-xl pb-20">{children}</div>
+        <div className="min-h-dvh pb-16">{children}</div>
         <BottomNav />
       </body>
     </html>

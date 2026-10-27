@@ -5,6 +5,10 @@ import { defineConfig, globalIgnores } from "eslint/config";
 export default defineConfig([
   ...nextVitals,
   ...nextTypeScript,
+  {
+    // Every photo is a compressed data URL from the phone or Firestore; next/image adds nothing.
+    rules: { "@next/next/no-img-element": "off" },
+  },
   globalIgnores([
     ".next/**",
     "coverage/**",
