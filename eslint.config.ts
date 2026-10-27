@@ -11,6 +11,8 @@ export default defineConfig([
   },
   globalIgnores([
     ".next/**",
+    "out/**",
+    ".firebase/**",
     "coverage/**",
     "playwright-report/**",
     "test-results/**",

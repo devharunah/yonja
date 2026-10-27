@@ -4,6 +4,7 @@ import {
   findRelapseCandidate,
   isOpen,
   pinColour,
+  preCheckAfterPhoto,
 } from "@/lib/spot-status";
 
 import { DAY, NOW, makeSpot } from "./fixtures";
@@ -100,5 +101,21 @@ describe("findRelapseCandidate", () => {
 
   it("ignores spots that are still open", () => {
     expect(findRelapseCandidate([makeSpot()], makeSpot(), NOW)).toBeNull();
+  });
+});
+
+describe("preCheckAfterPhoto", () => {
+  it("rejects an after photo more than 75 m from the pin", () => {
+    const check = preCheckAfterPhoto(120, 40);
+    expect(check.ok).toBe(false);
+  });
+
+  it("rejects the before photo uploaded again", () => {
+    expect(preCheckAfterPhoto(5, 0).ok).toBe(false);
+    expect(preCheckAfterPhoto(5, 6).ok).toBe(false);
+  });
+
+  it("passes a nearby, genuinely new photo on to Gemini", () => {
+    expect(preCheckAfterPhoto(20, 30).ok).toBe(true);
   });
 });

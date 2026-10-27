@@ -1,4 +1,10 @@
-import { MIN_CONFIDENCE, RELAPSE_DAYS, RELAPSE_RADIUS_M } from "@/lib/constants";
+import {
+  MIN_CONFIDENCE,
+  RELAPSE_DAYS,
+  RELAPSE_RADIUS_M,
+  SAME_PHOTO_MAX_DISTANCE,
+  VERIFY_RADIUS_M,
+} from "@/lib/constants";
 import { distanceM, type LatLng } from "@/lib/geo";
 import type { Spot, SpotStatus, Verdict } from "@/lib/types";
 
@@ -115,4 +121,23 @@ export function findRelapseCandidate(spots: Spot[], point: LatLng, now: number):
     }
   }
   return best;
+}
+
+export type CheatCheck = { ok: true } | { ok: false; reason: string };
+
+/**
+ * The checks that run before Gemini sees the after photo (V2). Both are cheap and certain, so a
+ * re-uploaded before photo or a photo from across town never costs an AI call.
+ */
+export function preCheckAfterPhoto(distanceFromPinM: number, hashDistance: number): CheatCheck {
+  if (distanceFromPinM > VERIFY_RADIUS_M) {
+    return {
+      ok: false,
+      reason: `The after photo was taken ${Math.round(distanceFromPinM)} m from the pin. It must be within ${VERIFY_RADIUS_M} m.`,
+    };
+  }
+  if (hashDistance <= SAME_PHOTO_MAX_DISTANCE) {
+    return { ok: false, reason: "That is the before photo again. Take a new photo after cleaning." };
+  }
+  return { ok: true };
 }
