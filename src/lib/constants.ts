@@ -22,5 +22,5 @@ export const MIN_CONFIDENCE = 0.6;
 /** dHash Hamming distance at or below which two photos count as the same picture. */
 export const SAME_PHOTO_MAX_DISTANCE = 6;
 
-export const GEMINI_MODEL = "gemini-2.5-flash";
+export const GEMINI_MODEL = "gemini-3.6-flash";
 export const GEMINI_TIMEOUT_MS = 25_000;

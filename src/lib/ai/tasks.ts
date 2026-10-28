@@ -69,6 +69,7 @@ export function askData(question: string, data: unknown) {
     askSchema,
     `${CONTEXT}
 A division environment officer asked a question about the reported spots.
+Glossary: "open" spots still need cleaning (open = true); "cleaned" or "verified" spots have open = false. A relapse is a cleaned spot that came back. Sacks are estimates.
 Answer ONLY from the DATA below. Do not guess or use outside knowledge. If the data cannot answer it, answer exactly "No data for that yet." Keep the answer to one to three sentences with the numbers that matter.
 data_used: short labels for the fields and filters you used, for example "division", "site_type = blocked_drain".
 

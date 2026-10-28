@@ -60,6 +60,7 @@ export function dataRows(spots: Spot[]) {
     site_type: s.siteType,
     severity: s.severity,
     status: s.status,
+    open: isOpen(s.status),
     relapse: s.relapse,
     est_sacks: `${s.estSacksMin}-${s.estSacksMax}`,
     sacks_removed: s.sacksRemoved,
